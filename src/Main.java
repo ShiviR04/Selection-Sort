@@ -6,6 +6,7 @@ public class Main {
         AllStudents print = new AllStudents();
         Statistics stat = new Statistics();
         Student[] mainStudents;
+
         try {
             System.out.println("How many students will you enter?");
             int totalStudents = scanner.nextInt();
@@ -18,8 +19,8 @@ public class Main {
             for (int i = 0; i < totalStudents; i++) {
                 String name;
                 System.out.println("Enter Student " + (i + 1) + " name: ");
+                scanner.nextLine();
                 name = scanner.nextLine();
-                scanner.next();
                 System.out.println("Enter Student " + (i + 1) + " graduation year: ");
                 int graduationYear = scanner.nextInt();
                 double[] quarterAverage = new double[4];
@@ -35,20 +36,30 @@ public class Main {
                 Student newStudent = new Student(name, graduationYear, 0, quarterAverage);
                 mainStudents[i] = newStudent;
             }
+
             boolean actionRepeat = true;
             while (actionRepeat) {
                 System.out.println("What would you like to do?\n 1 is print students by name.\n 2 is print students by final average.\n 3 is print mean of final averages.\n 4 is print median of final averages.\n 5 is print mode of final averages.\n 6 is print standard deviation with popular mean of final averages.\n ");
                 int userDesire = scanner.nextInt();
+                while (userDesire > 6 || userDesire < 0) {
+                    System.out.println("Try Again: ");
+                    userDesire = scanner.nextInt();
+                }
                 Student[] allStudents = stat.finalAverage(mainStudents, totalStudents);
-                switch (userDesire) {
-                    case 1:
-                        print.printName(allStudents, totalStudents);
-                    case 2:
-                        print.printFinalAverage(allStudents, totalStudents);
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
+                if (userDesire == 1) print.printName(allStudents, totalStudents);
+                else if (userDesire == 2) print.printFinalAverage(allStudents, totalStudents);
+                else if (userDesire == 3) {
+                    Student[] sorted = print.printFinalAverage(allStudents, totalStudents);
+                    stat.mean(allStudents, totalStudents);
+                } else if (userDesire == 4) {
+                    Student[] sorted = print.printFinalAverage(allStudents, totalStudents);
+                    stat.median(allStudents, totalStudents);
+                } else if (userDesire == 5) {
+                    Student[] sorted = print.printFinalAverage(allStudents, totalStudents);
+                    stat.mode(allStudents, totalStudents);
+                } else if (userDesire == 6) {
+                    Student[] sorted = print.printFinalAverage(allStudents, totalStudents);
+                    stat.StandardDeviation(allStudents, totalStudents);
                 }
             }
         } catch (InputMismatchException e) {
