@@ -66,9 +66,12 @@ public class Main {
                 else if (userDesire == 4) stat.median();
                 else if (userDesire == 5) stat.mode();
                 else if (userDesire == 6) stat.StandardDeviation();
-
             }
         } catch (InputMismatchException e) {
+            System.out.println("Please Enter a valid Integer value! ");
+            System.out.println("Program is exiting! ");
+            System.exit(0);
+        } catch (NullPointerException e) {
             System.out.println("Please Enter a valid Integer value! ");
             System.out.println("Program is exiting! ");
             System.exit(0);
