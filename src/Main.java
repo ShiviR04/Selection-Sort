@@ -73,8 +73,8 @@ public class Main {
                         System.out.println("Enter a number at or less than " + (15 - totalStudents));
                     }
                     Student[] temp = new Student[newTotalStudents];
-                    scanner.nextLine();
                     for (int i = 0; i < newTotalStudents; i++) {
+                        scanner.nextLine();
                         String name;
                         System.out.println("Enter Student " + (i + 1) + " name: ");
                         name = scanner.nextLine();
@@ -94,8 +94,11 @@ public class Main {
                         temp[i] = newStudent;
                     }
                     Student[] newMainStudents = new Student[totalStudents + newTotalStudents];
-                    for (int i = 0; i < totalStudents; i++) System.arraycopy(allStudents[i], 0, newMainStudents[i], 0, totalStudents);
-                    for (int i = 0; i < newTotalStudents; i++) System.arraycopy(temp[i], 0, newMainStudents, totalStudents, newTotalStudents);
+                    System.arraycopy(allStudents, 0, newMainStudents, 0, totalStudents);
+                    System.arraycopy(temp, 0, newMainStudents, totalStudents, newTotalStudents);
+                    mainStudents = new Student[newMainStudents.length];
+                    mainStudents = newMainStudents;
+                    totalStudents = newMainStudents.length;
                 }
                 else if (userDesire == 8) {
                     System.out.println("How many students will you enter?");
@@ -105,9 +108,9 @@ public class Main {
                         System.out.println("Try again: ");
                         totalStudents = scanner.nextInt();
                     }
-                    scanner.nextLine();
                     mainStudents = new Student[totalStudents];
                     for (int i = 0; i < totalStudents; i++) {
+                        scanner.nextLine();
                         String name;
                         System.out.println("Enter Student " + (i + 1) + " name: ");
                         scanner.nextLine();
